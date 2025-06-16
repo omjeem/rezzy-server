@@ -1,9 +1,9 @@
 import questionData from "./datasets/indian-medical-pg-questions.json"
 import flashCardsData from "./datasets/indian-medical-pg-flashcards.json"
 import { getDataInBatches } from "../config/dataBatches";
-import { VectorSchemaClass } from "./model";
 import axios from "axios";
 import { envConfig } from "../config/envConfig";
+import { VectorSchemaClass } from "../config/interface";
 
 
 async function insertData(formattedData: any, k: number) {
@@ -24,7 +24,6 @@ async function insertData(formattedData: any, k: number) {
             if (r?.result?.errors) {
                 throw new Error("Error occured at ",)
             }
-            console.log("result is if error>>", r?.result?.errors)
         })
     }).catch(error => {
         console.log("Error while creating the embedding >>>", error.response)

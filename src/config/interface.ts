@@ -9,3 +9,8 @@ export interface Flashcard {
     id: string; topic: string; subtopic: string; front: string; back: string;
     difficulty: "easy" | "medium" | "hard"; tags: string[];
 }
+
+export enum VectorSchemaClass {
+    Question = "Question",
+    Flashcard = "Flashcard"
+}

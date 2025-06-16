@@ -1,8 +1,4 @@
-
-export enum VectorSchemaClass {
-    Question = "Question",
-    Flashcard = "Flashcard"
-}
+import { VectorSchemaClass } from "../config/interface";
 
 export const questionSchema = {
     class: VectorSchemaClass.Question,

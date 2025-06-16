@@ -1,5 +1,6 @@
 import axios from "axios";
 import { envConfig } from "./envConfig";
+import OpenAI from "openai";
 
 
 export const weaviateClient = axios.create({
@@ -9,4 +10,8 @@ export const weaviateClient = axios.create({
         "X-OpenAI-Api-Key": envConfig.openAiKey,
         "Authorization": `Bearer ${envConfig.weaviate.apiKey}`
     }
+});
+
+export const openaiClient = new OpenAI({
+    apiKey: envConfig.openAiKey
 });

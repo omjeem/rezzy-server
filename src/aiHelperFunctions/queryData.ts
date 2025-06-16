@@ -1,8 +1,8 @@
 import { weaviateClient } from "../config/client";
-import { VectorSchemaClass } from "./model";
+import { VectorSchemaClass } from "../config/interface";
 
 export async function queryOnFlashCardAndQuestions(queryData: string, limit: number, isQueryOnQuestion: boolean) {
-   
+
     let query;
 
     if (isQueryOnQuestion) query = ` {
@@ -43,9 +43,28 @@ export async function queryOnFlashCardAndQuestions(queryData: string, limit: num
         `
     try {
         const res = await weaviateClient.post("/graphql", { query });
-        console.log("Results >>>", JSON.stringify(res.data, null, 2));
-        return res
+        const data = res.data.data.Get
+        let response = []
+        if (isQueryOnQuestion) {
+            response = data[VectorSchemaClass.Question]?.map((d: any) => {
+                const base64Options = d.options;
+                const decoded = Buffer.from(base64Options, 'base64').toString('utf-8');
+                const options = JSON.parse(decoded);
+                return {
+                    ...d,
+                    options
+                }
+            })
+        } else {
+            const flashCardData = data[VectorSchemaClass.Flashcard]
+            response = [...flashCardData]
+        }
+        return {
+            type: isQueryOnQuestion ? VectorSchemaClass.Question : VectorSchemaClass.Flashcard,
+            data: response
+        }
+
     } catch (err: any) {
-        console.error("❌ Query failed:", err.response?.data || err.message);
+        console.error("Query failed:", err.response?.data || err.message);
     }
 }
