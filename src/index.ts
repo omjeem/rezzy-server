@@ -5,6 +5,8 @@ import { parseUserQuery } from "./aiHelperFunctions/parseUserQuesry"
 import { queryOnFlashCardAndQuestions } from "./aiHelperFunctions/queryData"
 import { createSchemaForVectors } from "./aiHelperFunctions/createSchema"
 import { insertDataForEmbedding } from "./aiHelperFunctions/embedData"
+import questionData from "./datasets/indian-medical-pg-questions.json"
+import flashCardData from "./datasets/indian-medical-pg-flashcards.json"
 
 
 const app = express()
