@@ -3,10 +3,8 @@ import cors from "cors"
 import { envConfig } from "./config/envConfig"
 import { parseUserQuery } from "./aiHelperFunctions/parseUserQuesry"
 import { queryOnFlashCardAndQuestions } from "./aiHelperFunctions/queryData"
-import { createSchemaForVectors } from "./aiHelperFunctions/createSchema"
-import { insertDataForEmbedding } from "./aiHelperFunctions/embedData"
-import questionData from "./datasets/indian-medical-pg-questions.json"
-import flashCardData from "./datasets/indian-medical-pg-flashcards.json"
+// import { createSchemaForVectors } from "./aiHelperFunctions/createSchema"
+// import { insertDataForEmbedding } from "./aiHelperFunctions/embedData"
 
 
 const app = express()
@@ -14,17 +12,17 @@ app.use(cors())
 app.use(express.json())
 
 
-const createSchemaAndEmbedData = async () => {
-    await createSchemaForVectors();
-    await insertDataForEmbedding()
-}
+// const createSchemaAndEmbedData = async () => {
+//     await createSchemaForVectors();
+//     await insertDataForEmbedding()
+// }
 
 app.get("/embed-data", async (req: Request, res: Response): Promise<any> => {
-    createSchemaAndEmbedData()
-    return res.status(200).send({
-        status: true,
-        message: "Doc Embedding started"
-    })
+    // createSchemaAndEmbedData()
+    // return res.status(200).send({
+    //     status: true,
+    //     message: "Doc Embedding started"
+    // })
 })
 
 
