@@ -30,3 +30,24 @@ WEAVIATE_APIKEY=your_weaviate_api_key
 npm install 
 num run build && npm run start
 
+## 🧠 Embedding Workflow
+Weaviate uses the text2vec-openai module to generate vector embeddings automatically on insert, using the OpenAI model text-embedding-3-small.
+
+You don't need to manually generate embeddings. Just ensure the schema is set up correctly, and insert your documents.
+
+## 📌 One-time Route to Initialize Schema and Embed Data
+```
+GET /embed-data
+```
+This will:
+
+Create the Flashcard and Question classes (if not already present)
+
+Read raw .json files
+
+Upload & vectorize flashcard and question data into Weaviate
+
+Make sure you run the backend and hit this route only once during setup to avoid duplicate insertions.
+
+
+

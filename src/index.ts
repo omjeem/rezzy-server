@@ -54,6 +54,13 @@ app.post("/", async (req: Request, res: Response): Promise<any> => {
     }
 })
 
+app.get("/health", async (req: Request, res: Response): Promise<any> => {
+    return res.status(200).send({
+        status: true,
+        message: "Welcome to regzy server"
+    })
+})
+
 app.listen(envConfig.port, () => {
     console.log(`Server url is http://localhost:${envConfig.port}`)
 })
