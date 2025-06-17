@@ -12,10 +12,18 @@ app.use(cors())
 app.use(express.json())
 
 
-// const createSchemaAndEmbedData = async () => {
-//     await createSchemaForVectors();
-//     await insertDataForEmbedding()
-// }
+const createSchemaAndEmbedData = async () => {
+    await createSchemaForVectors();
+    await insertDataForEmbedding()
+}
+
+app.get("/embed-data", async (req: Request, res: Response): Promise<any> => {
+    createSchemaAndEmbedData()
+    return res.status(200).send({
+        status: true,
+        message: "Doc Embedding started"
+    })
+})
 
 
 app.post("/", async (req: Request, res: Response): Promise<any> => {
